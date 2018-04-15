@@ -17,7 +17,7 @@
 	<div id=contenu>
 		<?php 
 		// affichage de la liste des covoiturages 
-			include("../include/_inc_parametres.php"); 
+			include("../include/_inc_parametres.php");
 			include("../include/_inc_connexion.php");
 			include("../include/dateFrancais.php");
 			include('../include/head.php');
@@ -25,7 +25,7 @@
 			
 		//	on récupère toutes les lignes 
 			$resultat = $cnx->query("SELECT covoiturage.*, nom, prenom FROM covoiturage, membre 
-                                               WHERE covoiturage.numMembre = membre.numMembre ORDER BY dateDepot DESC;");
+                                    WHERE covoiturage.numMembre = membre.numMembre ORDER BY dateDepot DESC;");
 			
 		//le résultat est récupéré sous forme d'objet
 			$resultat->setFetchMode(PDO::FETCH_OBJ);
@@ -75,8 +75,10 @@
 							if ($init == false)
 							{ ?>
 								</table> <!-- Fin de la table des covoiturages en attentes -->
-								<h2 class="covoit-table-title">
-									<span id="separator-table">___________________________________________________________________________________________</span>
+								<h2 class="covoit-table-title text-center">
+									<svg height="5" width="640">
+										<line x1="0" y1="0" x2="640" y2="0" style="stroke:#A4A4A4;stroke-width:4" />
+									</svg>
 									<br />
 									<br />
 									Liste des covoiturages (confirmés)

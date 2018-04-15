@@ -8,6 +8,6 @@
 $HOTE = "localhost";	// nom du serveur de données : localhost ou serv-wamp1 ou serv-wamp1
 $PORT = '3306';			// numéro du port
 $USER = "root";			// nom de l'utilisateur
-$PWD  = "rootphp";		// son mot de passe
+$PWD  = "";		// son mot de passe
 $BDD  = "dlsbdeProjetB32";		// nom de la base de données	
 ?>
