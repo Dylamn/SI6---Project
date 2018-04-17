@@ -1,4 +1,5 @@
-﻿<html>
+﻿<?php include('../include/head.php'); ?>
+<html>
 
 <head>
 	<!-- titre de la page -->
@@ -19,22 +20,14 @@
 		<a href='covoiturage.php'class="glyphicon glyphicon-arrow-left" id="return-arrow"></a>
 		<h2>Caractéristiques du covoiturage</h2>
 	</div>
-	<div id="side-choice" class="text-center">
-		<p>Veuillez effectuer votre choix ici :</p>
-		<form action="manage_ad.php" method="post">
-			<input type="submit" name="validate" class="btn btn-success" value="Valider">
-			<input type="submit" name="refuse" class="btn btn-danger" value="Refuser">
-		</form>
-	</div>
-	<div id=conteneur class="container">
-		<div id=contenu>
+	<div class="container">
 			<?php 
 		// affichage de la liste des covoiturages 
 			include("../include/_inc_parametres.php"); 
 			include("../include/_inc_connexion.php");
 				
 		// préparation de la requête : recherche d'un covoiturage particulier
-			$req_pre = $cnx->prepare("SELECT * FROM covoiturage WHERE  numCo = :id");
+			$req_pre = $cnx->prepare("SELECT covoiturage.*, nom, prenom, classe FROM covoiturage, membre WHERE numCo = :id AND covoiturage.numMembre = membre.numMembre");
 		// liaison de la variable à la requête préparée
 			$req_pre->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
 			$req_pre->execute();
@@ -42,80 +35,80 @@
 			$covoit=$req_pre->fetch(PDO::FETCH_OBJ);
 			
 		?>
-			<table class="table table-borderless">
-				<th scope="row" colspan="4" class="text-center">Places & prix</th>
-				<tr id="main-info">
-					<td scope="col" colspan="3" class="text-left">
-						<span class="glyphicon glyphicon-user"></span>	3 places
-					</td>
-					<td scope="col" class="text-right">
-						5.00 <span class="glyphicon glyphicon-euro"
-					</td>
-				</tr>
-				<th scope="row" colspan="4" class="text-center">
-					<br />Infos sur le trajet
-				</th>
-				<tr id="path-info">
-					<td scope="col" class="text-left">
-						<span class="glyphicon glyphicon-home"></span> | <?= $covoit->villeDepart . '<br />' . 
-						'<span id="sub-path-info">' . $covoit->pointDepart . '</span>' ?>
-					</td>
-					<td scope="col" class="text-left">
-						<svg width="75" height="75">
-   							<circle cx="37" cy="37" r="10" stroke="grey" stroke-width="2" fill="#6399cd" />
-   							Sorry, your browser does not support inline SVG.
-						</svg> 		
-						<!-- <span class="glyphicon glyphicon-arrow-right"></span> -->
-					</td>
-					<td scope="col" colspan="2"id="trip">
-						<span id="dash-road"></span>
-					</td>
-					<td scope="col" class="text-right">
-					<svg width="75" height="75">
-   							<circle cx="37" cy="37" r="10" stroke="grey" stroke-width="2" fill="#6399cd" />
-   							Sorry, your browser does not support inline SVG.
-						</svg> 
-					</td>
-					<td scope="col" class="text-right">
-						<span class="glyphicon glyphicon-flag"></span> | <?= $covoit->villeArrive . '<br />' .
-						'<span id="sub-path-info">' . $covoit->pointArrive . '</span>' ?>
-					</td>
-				</tr>
+		<section>
+			<div class="table-responsive">
+				<table class="table tables-striped">
+					<th scope="row" colspan="5" class="text-center">Places & prix</th>
+					<tr id="main-info">
+						<td scope="col" colspan="3" class="text-left">
+							<span class="glyphicon glyphicon-user"></span>	3 places
+						</td>
+						<td scope="col" colspan="2" class="text-right">
+							5.00 <span class="glyphicon glyphicon-euro"></span>
+						</td>
+					</tr>
+					<th scope="row" colspan="5" class="text-center">
+						<br />Infos sur le trajet
+					</th>
+					<tr id="path-info">
+						<td scope="col" class="text-left">
+							<span class="glyphicon glyphicon-home"></span> | <?= utf8_encode($covoit->villeDepart) . '<br />' . 
+							'<span id="sub-path-info">' . utf8_encode($covoit->pointDepart) . '</span>' ?>
+						</td>
+						<td scope="col" colspan="3">
+							<svg id="road-dash" width="100%" height="100">
+								<line id="dash-road"  x1="3" y1="50" x2="100%" y2="50" stroke-width="3" />
+								<circle cx="1.69%" cy="50" r="10" stroke="grey" stroke-width="2" fill="#6399cd" />
+								<circle cx="98.2%" cy="50" r="10" stroke="grey" stroke-width="2" fill="#6399cd" />
+								Sorry, your browser does not support inline SVG.
+							</svg>
+						</td>
+						<td scope="col" class="text-right">
+							<span class="glyphicon glyphicon-flag"></span> | <?= utf8_encode($covoit->villeArrive) . '<br />' .
+							'<span id="sub-path-info">' . utf8_encode($covoit->pointArrive) . '</span>' ?>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</section>
+		<br />
+		<article id="info-driver" class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr> 
+						<td><h2>Conducteur</h2></td>
+						<td><h2>Voiture</h2></td>
+						<td><h2>Informations complémentaires</h2></td>
+					</tr>
+				</thead>
 				<tr>
-					<td scope="col"></td>
-				</tr>
-			</table>
-			<table class="table table-striped table-bordered">
-				<tr>
-					<td class="glyphicon glyphicon-user">	Nombre de places :
-						<?php echo $covoit->nbPlaces; ?>
+					<td scope="col">
+						<p style="line-height: 27px;">
+							<?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1) . "<br />(" . utf8_encode($covoit->classe) . ")"; ?>
+						</p>
 					</td>
-					<td>Prix :
-						<?php echo $covoit->prix; ?> €</td>
+					<td scope="col">
+						<p>
+							<?= $covoit->voiture ?> <br />
+							Couleur : <?= $covoit->couleur ?>
+						</p>
+					</td>
+					<td scope="col" colspan="3">
+						<p>
+							<?= $covoit->description ?>
+						</p>
+					</td>
 				</tr>
+			</table>	
+			<button type="button" class="btn btn-primary"><a style="color: #fff;" href='envoiMail.php?id=<?php echo $covoit->numCo; ?>' class="glyphicon glyphicon-envelope"> Envoyer mail</a></button>
+		</article>
 
-				<tr>
-					<td>Ville départ :
-						<?php echo utf8_encode($covoit->villeDepart); ?>
-					</td>
-					<td>Point départ :
-						<?php echo utf8_encode($covoit->pointDepart); ?>
-					</td>
-				</tr>
-
-				<tr>
-					<td>Ville arrivée :
-						<?php echo utf8_encode($covoit->villeArrive); ?>
-					</td>
-					<td>Point arrivée :
-						<?php echo utf8_encode($covoit->pointArrive); ?>
-					</td>
-				</tr>
-				<td>
-					<a href='envoiMail.php?id=<?php echo $covoit->numCo; ?>' class="glyphicon glyphicon-envelope"> Envoyer mail</a>
-				</td>
-			</table>
-			<br />
+		<div id="booking" class="text-center">
+			<p>Veuillez effectuer votre choix ici :</p>
+			<form action="manage_ad.php" method="post">
+				<input type="submit" name="validate" class="btn btn-success" value="Valider">
+				<input type="submit" name="refuse" class="btn btn-danger" value="Refuser">
+			</form>
 		</div>
 	</div>
 

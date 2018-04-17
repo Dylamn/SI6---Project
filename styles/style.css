@@ -842,6 +842,12 @@ svg#bigTriangleColor {
     }
 }
 
+@media screen and (max-width: 1200px) {
+    #road-dash {
+        display: none;
+    }
+}
+
 /*	Covoiturage
     ==================================================*/
 
@@ -870,8 +876,8 @@ thead tr td {
     text-align: center;
     margin: 0 auto;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 2px;
+    left: 2px;
 }
 
 #parent-pulse {
@@ -900,6 +906,13 @@ thead tr td {
 /*	detailCovoit
     ================================================*/
 
+#return-arrow {
+    font-size: 50px;
+    padding: 10px;
+    margin-left: 10px;
+    position: absolute;
+}
+
 /* Tableau */
 
 #main-info td span {
@@ -917,32 +930,22 @@ thead tr td {
     font-size: 16px;
 }
 
-#trip {
-    position: relative;
-}
-#dash-road {
-    position: absolute;
-    z-index: 1;
-    top: 45px;
-    left: 15px;
-    content: "";
-    display: block;
-    width: 20px;
-    height: 5px;
-    background: #000 url('/images/bg-road-dash-x.png') repeat-x 100% 3px;
+svg #dash-road {
+    stroke: grey;
+    stroke-dasharray: 5, 5;
 }
 
 
-#return-arrow {
-    font-size: 50px;
-    padding: 10px;
-    margin-left: 10px;
-    position: absolute;
+/* article conducteur*/
+
+#info-driver {
+    float: left;
+    /* border: 1px solid #A4A4A4; */
+    border-radius: 5px;
 }
 
-#side-choice {
+#booking {
     float: right;
-    margin: 50px;
     border: 1px solid #2980b9;
     border-radius: 5px;
     padding: 10px;
@@ -952,3 +955,5 @@ thead tr td {
     text-align: center;
     margin-top: 30px;
 }
+
+

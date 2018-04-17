@@ -32,88 +32,99 @@
 		
 		if ($_SESSION['privilege'] == "admin")
 		{ ?>
-			<h2 class="covoit-table-title">Liste des covoiturages (à confirmer)
+		<div class="container">
+			<h1>
+				Liste des covoiturages
+				<svg height="10" width="100%">
+					<line x1="0%" y1="10" x2="100%" y2="10" style="stroke:#6399cd; stroke-width:4" />
+				</svg>
+			</h1>
+			<h3 class="covoit-table-title">À confirmer
 				<div id="parent-pulse" class="glyphicon glyphicon-exclamation-sign"> 
-					<div class="btn-pulse">
-					</div>
+					<div class="btn-pulse"></div>
 				</div>
-			</h2>
-			
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<td>Nom</td>
-						<td>Prenom</td>
-						<td>Départ</td>
-						<td><b>Destination</td>
-						<td>Date départ</td>
-						<td>Heure départ</td>
-						<td>En savoir plus</td>
-					</tr>
-				</thead>
-			<?php 
-			while ($covoit = $resultat->fetch())
-			{
-				$init = false; // Permet de créer l'entête pour le tableau des covoiturages confirmés
-
-				if ($covoit->etat == 0)
-				{ ?>
-					<tr class="danger">
-						<td><?= utf8_encode($covoit->prenom); ?> </td>
-						<td><?= utf8_encode($covoit->nom); ?> </td>
-						<td><?= utf8_encode($covoit->villeDepart); ?> </td>
-						<td><?= utf8_encode($covoit->villeArrive); ?> </td>
-						<td><?= dateFrancais($covoit->jourDepart); ?> </td>
-						<td><?= $covoit->heureDepart; ?> </td>
-						<td><a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a></td>
-					</tr>
-
-				<?php
-				}
-				else if ($covoit->etat == 1)
+			</h3>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td>Nom</td>
+							<td>Prenom</td>
+							<td>Départ</td>
+							<td><b>Destination</td>
+							<td>Date départ</td>
+							<td>Heure départ</td>
+							<td>En savoir plus</td>
+						</tr>
+					</thead>
+				<?php 
+				while ($covoit = $resultat->fetch())
 				{
-					if ($init == false)
+					$init = false; // Permet de créer l'entête pour le tableau des covoiturages confirmés
+
+					if ($covoit->etat == 0)
 					{ ?>
-						</table> <!-- Fin de la table des covoiturages en attentes -->
-						<h2 class="covoit-table-title text-center">
-							<svg height="5" width="640">
-								<line x1="0" y1="0" x2="640" y2="0" style="stroke:#A4A4A4;stroke-width:4" />
+						<tr class="danger">
+							<td><?= utf8_encode($covoit->prenom); ?> </td>
+							<td><?= utf8_encode($covoit->nom); ?> </td>
+							<td><?= utf8_encode($covoit->villeDepart); ?> </td>
+							<td><?= utf8_encode($covoit->villeArrive); ?> </td>
+							<td><?= dateFrancais($covoit->jourDepart); ?> </td>
+							<td><?= $covoit->heureDepart; ?> </td>
+							<td><a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a></td>
+						</tr>
+
+					<?php
+					}
+					else if ($covoit->etat == 1)
+					{
+						if ($init == false)
+						{ ?>
+							</table> <!-- Fin de la table des covoiturages en attentes -->
+						</div>
+						<h3 class="covoit-table-title text-center">
+							<svg height="5" width="100%">
+								<line x1="5%" y1="0" x2="95%" y2="0" style="stroke:#A4A4A4;stroke-width:4" />
 							</svg>
 							<br />
 							<br />
-							Liste des covoiturages (confirmés)
-						</h2>
-						
-						<table class="table table-striped">
-							<thead>
+							Confirmés
+							<span style="color:green" class="glyphicon glyphicon-ok"></span>
+						</h3>
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<td>Conducteur</td>
+										<td>Départ</td>
+										<td><b>Destination</td>
+										<td>Date départ</td>
+										<td>Heure départ</td>
+										<td>En savoir plus</td>
+									</tr>
+								</thead>
+							<?php
+							$init = true;
+						} ?>
 								<tr>
-									<td>Conducteur</td>
-									<td>Départ</td>
-									<td><b>Destination</td>
-									<td>Date départ</td>
-									<td>Heure départ</td>
-									<td>En savoir plus</td>
+									<td><?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1); ?> </td>
+									<td><?= utf8_encode($covoit->villeDepart); ?> </td>
+									<td><?= utf8_encode($covoit->villeArrive); ?> </td>
+									<td><?= dateFrancais($covoit->jourDepart); ?> </td>
+									<td><?= $covoit->heureDepart; ?> </td>
+									<td><a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a></td>
 								</tr>
-							</thead>
-						<?php
-						$init = true;
-					} ?>
-							<tr>
-								<td><?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1); ?> </td>
-								<td><?= utf8_encode($covoit->villeDepart); ?> </td>
-								<td><?= utf8_encode($covoit->villeArrive); ?> </td>
-								<td><?= dateFrancais($covoit->jourDepart); ?> </td>
-								<td><?= $covoit->heureDepart; ?> </td>
-								<td><a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a></td>
-							</tr>
-						<?php
-				}
-			} ?>
-			</table>
+							<?php
+					}
+				} ?>
+				</table>
+			</div>
+		</div>
 			<?php
 		} 
 		else if ($_SESSION['privilege'] == "eleve")
 		{ ?>
+			<h3>Liste des covoiturages</h3>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -124,7 +135,7 @@
 						<td>Heure départ</td>
 						<td>En savoir plus</td>
 					</tr>
-				</thead> 
+				</thead>
 				<?php
 			while ($covoit = $resultat->fetch())
 			{
@@ -138,7 +149,7 @@
 						<td><?= $covoit->heureDepart; ?> </td>
 						<td><a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a></td>
 					</tr>
-				<?php 
+				<?php
 				}
 			}
 		} ?>
