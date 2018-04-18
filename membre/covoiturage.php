@@ -1,37 +1,34 @@
 ﻿<html>
+
 <head>
-		<!-- titre de la page -->
-		<title>BDE DLS Covoiturages</title>
-		<!-- type d'encodage de la page -->
-		<meta charset="utf-8" />
-		<!-- taille et échelle de la page -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0 ">
-		<!-- liens avec les fichiers css de bootstrap -->
-		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
-		<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"> 
-		<link rel="stylesheet" href="../styles/style.css">
-		<!-- par défaut les tableaux occupent 100% de la page; le width fixe la largeur à 600 pixels -->
-	</head>
+	<!-- titre de la page -->
+	<title>BDE DLS Covoiturages</title>
+	<!-- type d'encodage de la page -->
+	<meta charset="utf-8" />
+	<!-- taille et échelle de la page -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0 ">
+	<!-- liens avec les fichiers css de bootstrap -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../styles/style.css">
+	<!-- par défaut les tableaux occupent 100% de la page; le width fixe la largeur à 600 pixels -->
+</head>
+
 <body>
-<div id=conteneur>
-	<div id=contenu>
-		<?php 
-		// affichage de la liste des covoiturages 
-			include("../include/_inc_parametres.php");
-			include("../include/_inc_connexion.php");
-			include("../include/dateFrancais.php");
-			include('../include/head.php');
-			include('../include/menu.php');
-			
-		//	on récupère toutes les lignes 
-			$resultat = $cnx->query("SELECT covoiturage.*, nom, prenom FROM covoiturage, membre 
-                                    WHERE covoiturage.numMembre = membre.numMembre ORDER BY dateDepot DESC;");
-			
-		//le résultat est récupéré sous forme d'objet
-			$resultat->setFetchMode(PDO::FETCH_OBJ);
+	<?php 
+	// affichage de la liste des covoiturages 
+		require_once("../include/_inc_parametres.php");
+		require_once("../include/_inc_connexion.php");
+		require_once("../include/dateFrancais.php");
+		require_once('../include/head.php');
+		require_once('../include/menu.php');
 		
-		if ($_SESSION['privilege'] == "admin")
-		{ ?>
+		//	on récupère toutes les lignes 
+		$ad_waiting = $cnx->query("SELECT * FROM nbAnnonces_en_attente;");
+		//les résultats sont récupérés sous forme d'objet
+		$ad_waiting->setFetchMode(PDO::FETCH_OBJ);
+		$nombre = $ad_waiting->fetch();
+	?>
 		<div class="container">
 			<h1>
 				Liste des covoiturages
@@ -39,90 +36,122 @@
 					<line x1="0%" y1="10" x2="100%" y2="10" style="stroke:#6399cd; stroke-width:4" />
 				</svg>
 			</h1>
-			<h3 class="covoit-table-title">À confirmer
-				<div id="parent-pulse" class="glyphicon glyphicon-exclamation-sign"> 
-					<div class="btn-pulse"></div>
-				</div>
+			<?php if ($_SESSION['privilege'] == "admin")
+			{ 
+				if ($nombre->annonces > 0) 
+				{ ?>
+					<h3 class="covoit-table-title">À confirmer
+						<div id="parent-pulse" class="glyphicon glyphicon-exclamation-sign">
+							<div class="btn-pulse"></div>
+						</div>
+					</h3>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td>Conducteur</td>
+									<td>Départ</td>
+									<td>Destination</td>
+									<td>Date départ</td>
+									<td>Heure départ</td>
+									<td>En savoir plus</td>
+								</tr>
+							</thead>
+						<?php 
+				
+					$resultat = $cnx->query("SELECT covoiturage.*, nom, prenom FROM covoiturage, membre 
+										 WHERE covoiturage.numMembre = membre.numMembre AND etat = 0 ORDER BY dateDepot DESC;");
+					$resultat->setFetchMode(PDO::FETCH_OBJ);
+
+					while ($covoit = $resultat->fetch())
+					{ ?>
+						<tr class="danger">
+							<td>
+								<?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1); ?>
+							</td>
+							<td>
+								<?= utf8_encode($covoit->villeDepart); ?>
+							</td>
+							<td>
+								<?= utf8_encode($covoit->villeArrive); ?>
+							</td>
+							<td>
+								<?= dateFrancais($covoit->jourDepart); ?>
+							</td>
+							<td>
+								<?= $covoit->heureDepart; ?>
+							</td>
+							<td>
+								<a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a>
+							</td>
+						</tr>
+					<?php
+					} $resultat->closeCursor(); ?>
+						</table>
+					</div>	<!-- Fin de la table des covoiturages en attentes -->
+				<?php
+				}
+				else 
+				{
+					echo '<h3 class="covoit-table-title">Aucune demande à confirmer';
+				} ?>
+				
+			<h3 class="covoit-table-title text-center">
+				<svg height="5" width="100%">
+					<line x1="5%" y1="0" x2="95%" y2="0" style="stroke:#A4A4A4;stroke-width:4" />
+				</svg>
+				<br />
+				<br /> Confirmés
+				<span style="color:green" class="glyphicon glyphicon-ok"></span>
 			</h3>
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<td>Nom</td>
-							<td>Prenom</td>
+							<td>Conducteur</td>
 							<td>Départ</td>
-							<td><b>Destination</td>
+							<td>Destination</td>
 							<td>Date départ</td>
 							<td>Heure départ</td>
 							<td>En savoir plus</td>
 						</tr>
 					</thead>
-				<?php 
-				while ($covoit = $resultat->fetch())
-				{
-					$init = false; // Permet de créer l'entête pour le tableau des covoiturages confirmés
+					<?php 
+					$resultat = $cnx->query("SELECT covoiturage.*, nom, prenom FROM covoiturage, membre 
+					WHERE covoiturage.numMembre = membre.numMembre AND etat = 1 ORDER BY dateDepot DESC;");
+					$resultat->setFetchMode(PDO::FETCH_OBJ);
 
-					if ($covoit->etat == 0)
+					while ($covoit = $resultat->fetch())
 					{ ?>
-						<tr class="danger">
-							<td><?= utf8_encode($covoit->prenom); ?> </td>
-							<td><?= utf8_encode($covoit->nom); ?> </td>
-							<td><?= utf8_encode($covoit->villeDepart); ?> </td>
-							<td><?= utf8_encode($covoit->villeArrive); ?> </td>
-							<td><?= dateFrancais($covoit->jourDepart); ?> </td>
-							<td><?= $covoit->heureDepart; ?> </td>
-							<td><a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a></td>
+						<tr>
+							<td>
+								<?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1); ?>
+							</td>
+							<td>
+								<?= utf8_encode($covoit->villeDepart); ?>
+							</td>
+							<td>
+								<?= utf8_encode($covoit->villeArrive); ?>
+							</td>
+							<td>
+								<?= dateFrancais($covoit->jourDepart); ?>
+							</td>
+							<td>
+								<?= $covoit->heureDepart; ?>
+							</td>
+							<td>
+								<a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a>
+							</td>
 						</tr>
-
-					<?php
-					}
-					else if ($covoit->etat == 1)
-					{
-						if ($init == false)
-						{ ?>
-							</table> <!-- Fin de la table des covoiturages en attentes -->
-						</div>
-						<h3 class="covoit-table-title text-center">
-							<svg height="5" width="100%">
-								<line x1="5%" y1="0" x2="95%" y2="0" style="stroke:#A4A4A4;stroke-width:4" />
-							</svg>
-							<br />
-							<br />
-							Confirmés
-							<span style="color:green" class="glyphicon glyphicon-ok"></span>
-						</h3>
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<td>Conducteur</td>
-										<td>Départ</td>
-										<td><b>Destination</td>
-										<td>Date départ</td>
-										<td>Heure départ</td>
-										<td>En savoir plus</td>
-									</tr>
-								</thead>
-							<?php
-							$init = true;
-						} ?>
-								<tr>
-									<td><?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1); ?> </td>
-									<td><?= utf8_encode($covoit->villeDepart); ?> </td>
-									<td><?= utf8_encode($covoit->villeArrive); ?> </td>
-									<td><?= dateFrancais($covoit->jourDepart); ?> </td>
-									<td><?= $covoit->heureDepart; ?> </td>
-									<td><a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a></td>
-								</tr>
-							<?php
-					}
-				} ?>
+						<?php
+					} ?>
 				</table>
 			</div>
+			<?php 
+			} ?>
 		</div>
-			<?php
-		} 
-		else if ($_SESSION['privilege'] == "eleve")
+		<?php 
+		if ($_SESSION['privilege'] == "eleve")
 		{ ?>
 			<h3>Liste des covoiturages</h3>
 			<table class="table table-striped">
@@ -130,38 +159,50 @@
 					<tr>
 						<td>Conducteur</td>
 						<td>Départ</td>
-						<td><b>Destination</td>
+						<td>Destination</td>
 						<td>Date départ</td>
 						<td>Heure départ</td>
 						<td>En savoir plus</td>
 					</tr>
 				</thead>
 				<?php
-			while ($covoit = $resultat->fetch())
-			{
-				if ($covoit->etat == 1)
-				{ ?>
+		while ($covoit = $resultat->fetch())
+		{
+			if ($covoit->etat == 1)
+			{ ?>
 					<tr>
-						<td><?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1); ?> </td>
-						<td><?= utf8_encode($covoit->villeDepart); ?> </td>
-						<td><?= utf8_encode($covoit->villeArrive); ?> </td>
-						<td><?= dateFrancais($covoit->jourDepart); ?> </td>
-						<td><?= $covoit->heureDepart; ?> </td>
-						<td><a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a></td>
+						<td>
+							<?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1); ?>
+						</td>
+						<td>
+							<?= utf8_encode($covoit->villeDepart); ?>
+						</td>
+						<td>
+							<?= utf8_encode($covoit->villeArrive); ?>
+						</td>
+						<td>
+							<?= dateFrancais($covoit->jourDepart); ?>
+						</td>
+						<td>
+							<?= $covoit->heureDepart; ?>
+						</td>
+						<td>
+							<a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a>
+						</td>
 					</tr>
-				<?php
-				}
+					<?php
 			}
-		} ?>
-	</table>
+		}
+	} ?>
+			</table>
 	</div>
-	<?php include('../include/footer.php'); ?>
-</div>
+		<?php include('../include/footer.php'); ?>
 
-<!-- Obligatoirement avant la balise de fermeture de l'élément body  -->
+	<!-- Obligatoirement avant la balise de fermeture de l'élément body  -->
 	<!-- Intégration de la libraire jQuery -->
 	<script src="bootstrap/js/jquery.js"></script>
 	<!-- Intégration de la libraire de composants du Bootstrap -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
+
 </html>

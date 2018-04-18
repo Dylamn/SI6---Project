@@ -18,12 +18,12 @@
 <body>
 	<div class="row" id="ad-head">
 		<a href='covoiturage.php'class="glyphicon glyphicon-arrow-left" id="return-arrow"></a>
-		<h2>Caractéristiques du covoiturage</h2>
+		<h1>Caractéristiques du covoiturage</h1>
 	</div>
 	<div class="container">
 			<?php 
 		// affichage de la liste des covoiturages 
-			include("../include/_inc_parametres.php"); 
+			include("../include/_inc_parametres.php");
 			include("../include/_inc_connexion.php");
 				
 		// préparation de la requête : recherche d'un covoiturage particulier
@@ -57,9 +57,9 @@
 						</td>
 						<td scope="col" colspan="3">
 							<svg id="road-dash" width="100%" height="100">
-								<line id="dash-road"  x1="3" y1="50" x2="100%" y2="50" stroke-width="3" />
-								<circle cx="1.69%" cy="50" r="10" stroke="grey" stroke-width="2" fill="#6399cd" />
-								<circle cx="98.2%" cy="50" r="10" stroke="grey" stroke-width="2" fill="#6399cd" />
+								<line id="dash-road"  x1="0%" y1="50" x2="100%" y2="50" stroke-width="3" />
+								<circle cx="1.9%" cy="50" r="10" stroke="grey" stroke-width="2" fill="#6399cd" />
+								<circle cx="98.1%" cy="50" r="10" stroke="grey" stroke-width="2" fill="#6399cd" />
 								Sorry, your browser does not support inline SVG.
 							</svg>
 						</td>
@@ -106,8 +106,9 @@
 		<div id="booking" class="text-center">
 			<p>Veuillez effectuer votre choix ici :</p>
 			<form action="manage_ad.php" method="post">
-				<input type="submit" name="validate" class="btn btn-success" value="Valider">
-				<input type="submit" name="refuse" class="btn btn-danger" value="Refuser">
+				<input type="hidden" name="idCovoit" value=" <?= $_GET['id']; ?>" />
+				<input type="submit" name="validate" class="btn btn-success" value="Valider" />
+				<input type="submit" name="refuse" class="btn btn-danger" value="Refuser" />
 			</form>
 		</div>
 	</div>
