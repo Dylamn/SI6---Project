@@ -93,29 +93,34 @@
 				}
 				else 
 				{
-					echo '<h3 class="covoit-table-title">Aucune demande à confirmer';
-				} ?>
+					echo '<h3 class="covoit-table-title">Aucune demande à confirmer</h3>';
+				} 
+				$ad_confirm = $cnx->query("SELECT COUNT(*) AS annonces_confirmes FROM covoiturage WHERE etat = 1;");
+				$ad_confirm->setFetchMode(PDO::FETCH_OBJ);
+				$nombre = $ad_confirm->fetch();
 				
-			<h3 class="covoit-table-title text-center">
-				<svg height="5" width="100%">
-					<line x1="5%" y1="0" x2="95%" y2="0" style="stroke:#A4A4A4;stroke-width:4" />
-				</svg>
-				<br />
-				<br /> Confirmés
-				<span style="color:green" class="glyphicon glyphicon-ok"></span>
-			</h3>
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<td>Conducteur</td>
-							<td>Départ</td>
-							<td>Destination</td>
-							<td>Date départ</td>
-							<td>Heure départ</td>
-							<td>En savoir plus</td>
-						</tr>
-					</thead>
+				if ($nombre->annonces_confirmes > 0)
+				{ ?>
+					<h3 class="covoit-table-title text-center">
+						<svg height="5" width="100%">
+							<line x1="5%" y1="0" x2="95%" y2="0" style="stroke:#A4A4A4;stroke-width:4" />
+						</svg>
+						<br />
+						<br /> Confirmées
+						<span style="color:green" class="glyphicon glyphicon-ok"></span>
+					</h3>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td>Conducteur</td>
+									<td>Départ</td>
+									<td>Destination</td>
+									<td>Date départ</td>
+									<td>Heure départ</td>
+									<td>En savoir plus</td>
+								</tr>
+							</thead>
 					<?php 
 					$resultat = $cnx->query("SELECT covoiturage.*, nom, prenom FROM covoiturage, membre 
 					WHERE covoiturage.numMembre = membre.numMembre AND etat = 1 ORDER BY dateDepot DESC;");
@@ -148,54 +153,61 @@
 				</table>
 			</div>
 			<?php 
-			} ?>
+			}
+			else {
+				echo '<svg height="5" width="100%">';
+				echo '	<line x1="5%" y1="0" x2="95%" y2="0" style="stroke:#A4A4A4;stroke-width:4" />';
+				echo '</svg>';
+				echo '<h3 class="covoit-table-title">Aucun covoiturages actifs</h3>';
+			}
+		} ?>
 		</div>
 		<?php 
 		if ($_SESSION['privilege'] == "eleve")
 		{ ?>
-			<h3>Liste des covoiturages</h3>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<td>Conducteur</td>
-						<td>Départ</td>
-						<td>Destination</td>
-						<td>Date départ</td>
-						<td>Heure départ</td>
-						<td>En savoir plus</td>
-					</tr>
-				</thead>
+			<div class="container">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td>Conducteur</td>
+							<td>Départ</td>
+							<td>Destination</td>
+							<td>Date départ</td>
+							<td>Heure départ</td>
+							<td>En savoir plus</td>
+						</tr>
+					</thead>
 				<?php
-		while ($covoit = $resultat->fetch())
-		{
-			if ($covoit->etat == 1)
+				$resultat = $cnx->query("SELECT covoiturage.*, nom, prenom FROM covoiturage, membre 
+										 WHERE covoiturage.numMembre = membre.numMembre AND etat = 1 ORDER BY dateDepot DESC;");
+				$resultat->setFetchMode(PDO::FETCH_OBJ);
+			while ($covoit = $resultat->fetch())
 			{ ?>
-					<tr>
-						<td>
-							<?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1); ?>
-						</td>
-						<td>
-							<?= utf8_encode($covoit->villeDepart); ?>
-						</td>
-						<td>
-							<?= utf8_encode($covoit->villeArrive); ?>
-						</td>
-						<td>
-							<?= dateFrancais($covoit->jourDepart); ?>
-						</td>
-						<td>
-							<?= $covoit->heureDepart; ?>
-						</td>
-						<td>
-							<a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a>
-						</td>
-					</tr>
-					<?php
+				<tr>
+					<td>
+						<?= utf8_encode($covoit->prenom) . "  " . substr($covoit->nom, 0, 1); ?>
+					</td>
+					<td>
+						<?= utf8_encode($covoit->villeDepart); ?>
+					</td>
+					<td>
+						<?= utf8_encode($covoit->villeArrive); ?>
+					</td>
+					<td>
+						<?= dateFrancais($covoit->jourDepart); ?>
+					</td>
+					<td>
+						<?= $covoit->heureDepart; ?>
+					</td>
+					<td>
+						<a href='detailCovoit.php?id=<?= $covoit->numCo; ?>' class="glyphicon glyphicon-new-window"> En savoir plus</a>
+					</td>
+				</tr>
+			<?php
 			}
-		}
-	} ?>
+		} ?>
 			</table>
-	</div>
+		</div>
 		<?php include('../include/footer.php'); ?>
 
 	<!-- Obligatoirement avant la balise de fermeture de l'élément body  -->
