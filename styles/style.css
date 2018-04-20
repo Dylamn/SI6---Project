@@ -190,23 +190,23 @@ pre {
     margin: 23px 0;
 }
 
-.navbar-nav>li>a {
+.navbar-nav > li > a {
     padding: 30px 0;
     margin: 0 15px;
 }
 
-.navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-nav > li > a {
     color: inherit;
     text-transform: uppercase;
     font-size: 15px;
     font-weight: bold;
 }
 
-.navbar-inverse .navbar-nav>li>a:hover,
-.navbar-inverse .navbar-nav>li>a:focus,
-.navbar-inverse .navbar-nav>.active>a,
-.navbar-inverse .navbar-nav>.active>a:hover,
-.navbar-inverse .navbar-nav>.active>a:focus {
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus,
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
     background-color: transparent;
     background-color: rgba(255, 255, 255, 0);
     color: #fed84f;
@@ -602,16 +602,20 @@ svg#bigTriangleColor {
         display: block;
         width: 100% !important;
     }
+
     .text:first-child,
     .text:nth-child(2) {
         text-align: center;
     }
+
     .icon {
         margin: 0 auto;
     }
+
     .col-2 .column:first-child .icon {
         margin: 0 auto 50px;
     }
+
     .col-2 .column:nth-child(2) .icon {
         margin: 50px auto 0;
     }
@@ -637,8 +641,7 @@ svg#bigTriangleColor {
 }
 
 #footer a {
-    color: #FFC400;
-    ;
+    color: #FFC400;;
 }
 
 /*	Tableau l'actualité et Evenements de l'Accueil
@@ -665,13 +668,16 @@ svg#bigTriangleColor {
     .service-block {
         margin-bottom: 30px;
     }
+
     #image img.img-responsive {
         margin-left: auto;
         margin-right: auto;
     }
-    .navbar-nav>li>a {
+
+    .navbar-nav > li > a {
         margin: 0 7px;
     }
+
     #hero .lp-element {
         padding: 5px 2px 20px 2px;
     }
@@ -682,14 +688,17 @@ svg#bigTriangleColor {
         margin-left: 0;
         margin-right: 0;
     }
+
     .container {
         max-width: 690px;
         padding-left: 30px;
         padding-right: 30px;
     }
-    .navbar-nav>li>a {
+
+    .navbar-nav > li > a {
         padding: 10px;
     }
+
     .header-button {
         margin: 0;
     }
@@ -699,42 +708,54 @@ svg#bigTriangleColor {
     body {
         font-size: 14px;
     }
+
     h1 {
         font-size: 28px;
     }
+
     h3 {
         font-size: 20px;
     }
+
     h4 {
         font-size: 18px;
     }
+
     h5 {
         font-size: 16px;
     }
+
     h6 {
         font-size: 14px;
     }
+
     p.lead {
         font-size: 18px;
     }
+
     .section {
         padding: 13px 0;
     }
+
     .overview p.lead {
         margin-bottom: 40px;
     }
+
     .overview .lead {
         margin-left: 0;
         margin-right: 0;
     }
+
     .container {
         max-width: 690px;
         padding-left: 30px;
         padding-right: 30px;
     }
+
     #hero .lp-element {
         padding: 5px 2px 2px 2px;
     }
+
     .navbar-inverse .navbar-brand {
         padding: 18px 0px 0px 0px !important;
         margin-right: 13px !important;
@@ -750,9 +771,11 @@ svg#bigTriangleColor {
         padding-left: 30px;
         padding-right: 30px;
     }
+
     #hero h1 {
         font-size: 33px;
     }
+
     #hero p.lead {
         font-size: 1.5em;
     }
@@ -825,6 +848,7 @@ svg#bigTriangleColor {
     .col-xxs-12 {
         width: 100%;
     }
+
     .col-xxs-12 img {
         width: 100%;
     }
@@ -834,9 +858,11 @@ svg#bigTriangleColor {
     #side-choice {
         margin: 0 50px;
     }
+
     #ad-head h2 {
         margin-top: 18px !important;
     }
+
     #return-arrow {
         font-size: 30px !important;
     }
@@ -850,6 +876,22 @@ svg#bigTriangleColor {
 
 /*	Covoiturage
     ==================================================*/
+
+/* Nav bar */
+.navbar-covoit {
+    margin-bottom: 16px;
+    text-align: center;
+}
+.navbar-covoit .navbar-covoit-item {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-covoit .navbar-covoit-item .item-brand {
+    margin-right: 8px;
+    margin-left: 25px;
+}
+
 
 thead tr td {
     background-color: #6399cd;
@@ -926,15 +968,15 @@ thead tr td {
 #path-info {
     position: relative;
 }
+
 #sub-path-info {
     font-size: 16px;
 }
 
 svg #dash-road {
-    stroke: grey;
+    stroke: white;
     stroke-dasharray: 5, 5;
 }
-
 
 /* article conducteur*/
 

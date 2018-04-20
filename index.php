@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <head>
-<?php include('include/head.php'); ?>
-<?php include('include/menu.php'); ?>
+    <?php include('include/head.php'); ?>
+    <?php include('include/menu.php'); ?>
 </head>
 <style>
     body {
-        background-color:#fed84f;!important;
+        background-color: #fed84f;
+    !important;
     }
 </style>
 <!-- Start Hero Section
@@ -43,9 +44,10 @@ End Hero -->
 ================================================== -->
 
 <!--La balise SVG permet de créer une image vectoriel qui n'est pas composé de pixels -->
-<svg id="curveDownColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
-	<!-- La balise path permet de tracer toutes les formes possibles que l'on souhaite -->
-    <path d="M0 0 C 50 100 80 100 100 0 Z" />
+<svg id="curveDownColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100"
+     viewBox="0 0 100 100" preserveAspectRatio="none">
+    <!-- La balise path permet de tracer toutes les formes possibles que l'on souhaite -->
+    <path d="M0 0 C 50 100 80 100 100 0 Z"/>
 </svg>
 <section id="contenuaccueil" class="section">
     <div class="container">
@@ -60,12 +62,12 @@ End Hero -->
                     while ($row = $req->fetch()) {
                         echo '<div class="tableauaccueil">';
                         echo '  <div style="float: left;">';
-                        echo '      <strong><a href="article/' .$row['url'].'/">' . $row['titre'] . '</a></strong>';
+                        echo '      <strong><a href="article/' . $row['url'] . '/">' . $row['titre'] . '</a></strong>';
                         echo '  </div><br><hr>';
                         $chaine = $row['texte'];
                         $len = 100;
-                        echo $chaine = substr($chaine,0,$len) . "..." ;
-                        echo '<p style="text-align: right;"><a href="article/' .$row['url'].'/">En savoir plus ››</a></p>';
+                        echo $chaine = substr($chaine, 0, $len) . "...";
+                        echo '<p style="text-align: right;"><a href="article/' . $row['url'] . '/">En savoir plus ››</a></p>';
                         echo '</div>';
                     }
                     ?>
@@ -81,15 +83,15 @@ End Hero -->
                     while ($row = $req->fetch()) {
                         echo '<div class="tableauaccueil">';
                         echo '  <div style="float: left;">';
-                        echo '      <strong><a href="article/' .$row['url'].'/">' . $row['titre'] . '</a><br>Lieu : '.$row['lieu'].'</strong>';
+                        echo '      <strong><a href="article/' . $row['url'] . '/">' . $row['titre'] . '</a><br>Lieu : ' . $row['lieu'] . '</strong>';
                         echo '  </div>';
                         echo '  <div style="float: right;">';
-                        echo '      <strong>Du ' . Outils::convertirEnDateFR(strtotime($row['dateDebut'])) . '<br>au '.Outils::convertirEnDateFR(strtotime($row['dateFin'])).'</strong>';
+                        echo '      <strong>Du ' . Outils::convertirEnDateFR(strtotime($row['dateDebut'])) . '<br>au ' . Outils::convertirEnDateFR(strtotime($row['dateFin'])) . '</strong>';
                         echo '  </div><br><br><hr>';
                         $chaine = $row['texte'];
                         $len = 65;
-                        echo $chaine = substr($chaine,0,$len) . "..." ;
-                        echo '<p style="text-align: right;"><a href="agenda/' .$row['url'].'/">En savoir plus ››</a></p>';
+                        echo $chaine = substr($chaine, 0, $len) . "...";
+                        echo '<p style="text-align: right;"><a href="agenda/' . $row['url'] . '/">En savoir plus ››</a></p>';
                         echo '</div>';
                         echo '</div>';
                     }
@@ -105,7 +107,8 @@ End Contenu -->
 
 <!-- Start Contenu Section
 ================================================== -->
-<svg id="clouds" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+<svg id="clouds" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100"
+     preserveAspectRatio="none">
     <path d="M-5 100 Q 0 20 5 100 Z
          M0 100 Q 5 0 10 100
          M5 100 Q 10 30 15 100
@@ -150,8 +153,8 @@ End Contenu -->
                                         echo '<div class="item">';
                                     echo '  <div class="carousel-content">';
                                     echo '      <div>';
-                                    echo "          <p>".$row['texte']."<br>";
-                                    echo "          <b>".$row['hashtag']."</b></p><p>".$row['auteur']." - ".$row['classe']."</p>";
+                                    echo "          <p>" . $row['texte'] . "<br>";
+                                    echo "          <b>" . $row['hashtag'] . "</b></p><p>" . $row['auteur'] . " - " . $row['classe'] . "</p>";
                                     echo '      </div>';
                                     echo '  </div>';
                                     echo '</div>';
@@ -183,11 +186,9 @@ Script du Slider de boite à idées -->
 <script>
     setCarouselHeight('#carousel-example');
 
-    function setCarouselHeight(id)
-    {
+    function setCarouselHeight(id) {
         var slideHeight = [];
-        $(id+' .item').each(function()
-        {
+        $(id + ' .item').each(function () {
             // add all slide heights to an array
             slideHeight.push($(this).height());
         });
@@ -196,12 +197,11 @@ Script du Slider de boite à idées -->
         max = Math.max.apply(null, slideHeight);
 
         // set the slide's height
-        $(id+' .carousel-content').each(function()
-        {
-            $(this).css('height',max+'px');
+        $(id + ' .carousel-content').each(function () {
+            $(this).css('height', max + 'px');
         });
     }
 </script>
 <footer>
-<?php include('include/footer.php'); ?>
+    <?php include('include/footer.php'); ?>
 </footer>
