@@ -1,0 +1,149 @@
+/*	Responsive
+    ==================================================*/
+
+@media screen and (max-width: 560px) {
+    #side-choice {
+        margin: 0 50px;
+    }
+    #ad-head h2 {
+        margin-top: 18px !important;
+    }
+    #return-arrow {
+        font-size: 30px !important;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #road-dash {
+        display: none;
+    }
+}
+
+/*	Covoiturage
+    ==================================================*/
+
+/* Nav bar */
+
+.navbar-covoit {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.navbar-covoit .navbar-covoit-item {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-covoit .navbar-covoit-item .item-brand {
+    margin-right: 8px;
+    margin-left: 25px;
+}
+
+thead tr td {
+    background-color: #6399cd;
+    color: #fff;
+}
+
+#separator-table {
+    color: #848484;
+}
+
+.covoit-table-title {
+    text-align: center;
+}
+
+#confirm tr:nth-of-type(even) {
+    background-color: #e7e5e5ad;
+}
+
+/*	detailCovoit
+    ================================================*/
+
+#return-arrow {
+    font-size: 50px;
+    padding: 10px;
+    margin-left: 10px;
+    position: absolute;
+}
+
+/* Tableau */
+
+#main-info td span {
+    font-size: 30px;
+}
+
+#main-info td,
+#path-info td {
+    font-size: 22px;
+}
+
+#path-info {
+    position: relative;
+}
+
+#sub-path-info {
+    font-size: 16px;
+}
+
+svg #dash-road {
+    stroke: white;
+    stroke-dasharray: 5, 5;
+}
+
+/* article conducteur*/
+
+#info-driver {
+    float: left;
+    /* border: 1px solid #A4A4A4; */
+    border-radius: 5px;
+}
+
+#booking {
+    float: right;
+    border: 1px solid #2980b9;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#ad-head h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/*  Animation
+    ================================================*/
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(1.25);
+        background-color: hsla(0, 100%, 50%, 0.75);
+    }
+    18% {
+        transform: scale(1.50);
+        background-color: hsla(0, 100%, 50%, 0.30);
+    }
+    29% {
+        transform: scale(1);
+        background-color: hsla(0, 100%, 50%, 0.3);
+    }
+}
+
+.btn-pulse {
+    height: 20px;
+    width: 20px;
+    border-radius: 26px;
+    animation: pulse 3s infinite;
+    text-align: center;
+    margin: 0 auto;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+#parent-pulse {
+    position: relative;
+    color: red;
+}

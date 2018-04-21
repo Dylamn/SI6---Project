@@ -11,6 +11,7 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/temp.css">
     <!-- par défaut les tableaux occupent 100% de la page; le width fixe la largeur à 600 pixels -->
 </head>
 
@@ -32,23 +33,23 @@ $nombre = $ad_waiting->fetch();
 <div class="container">
     <nav class="navbar-covoit">
         <span class="navbar-covoit-item">
-            <a href='MesCovoiturages.php' class = "menu">
-                <span class = "item-brand glyphicon glyphicon-road" ></span>  <span>Mes trajets</span> 
+            <a href='covoiturage.php'>
+                <span class = "item-brand glyphicon glyphicon-th-list" ></span> Liste des covoiturages 
             </a>
         </span>
         <span class="navbar-covoit-item">
-            <a href='AjoutCovoiturage.php' class = "menu">
-                <span class = "item-brand glyphicon glyphicon-calendar" ></span>  Proposer un trajet 
+            <a href='RechercheCovoiturage.php'>
+                <span class = "item-brand glyphicon glyphicon-transfer" ></span> Itinéraire 
             </a>
         </span>
         <span class="navbar-covoit-item">
-            <a href='RechercheCovoiturage.php' class = "menu">
-                <span class = "item-brand glyphicon glyphicon-transfer" ></span>  Itinéraire 
+            <a href='AjoutCovoiturage.php'>
+                <span class = "item-brand glyphicon glyphicon-calendar" ></span> Proposer un trajet 
             </a>
         </span>
-        <span class="navbar-covoit-item ">
-            <a href='covoiturage.php' class = "menu">
-                <span class = "item-brand glyphicon glyphicon-th-list" ></span>  Liste des covoiturages 
+        <span class="navbar-covoit-item">
+            <a href='MesCovoiturages.php'>
+                <span class = "item-brand glyphicon glyphicon-road" ></span> Mes trajets
             </a>
         </span>
     </nav>
@@ -74,7 +75,7 @@ $nombre = $ad_waiting->fetch();
                         <td>Destination</td>
                         <td>Date départ</td>
                         <td>Heure départ</td>
-                        <td>En savoir plus</td>
+                        <td>Voir en détail</td>
                     </tr>
                     </thead>
                     <?php
@@ -136,7 +137,7 @@ $nombre = $ad_waiting->fetch();
                         <td>Destination</td>
                         <td>Date départ</td>
                         <td>Heure départ</td>
-                        <td>En savoir plus</td>
+                        <td>Voir en détail</td>
                     </tr>
                     </thead>
                     <?php

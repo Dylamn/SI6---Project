@@ -10,49 +10,42 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/style.css">
-    <!-- par défaut les tableaux occupent 100% de la page; le width fixe la largeur à 600 pixels -->
-    <style> .boite {
-            border: 2px solid #dea
-        } </style>
+    <link rel="stylesheet" href="../styles/temp.css">
 </head>
 <body>
 
-<div id=conteneur class="boite">
-    <div id=contenu>
+<?php
+    include("../include/_inc_parametres.php");
+    include("../include/_inc_connexion.php");
+    include("../include/dateFrancais.php");
+    include('../include/head.php');
+    include('../include/menu.php');
+?>
     <nav class="navbar-covoit">
         <span class="navbar-covoit-item">
-            <a href='MesCovoiturages.php' class = "menu">
-                <span class = "item-brand glyphicon glyphicon-road" ></span>  <span>Mes trajets</span> 
+            <a href='covoiturage.php'>
+                <span class = "item-brand glyphicon glyphicon-th-list" ></span> Liste des covoiturages
             </a>
         </span>
         <span class="navbar-covoit-item">
-            <a href='AjoutCovoiturage.php' class = "menu">
-                <span class = "item-brand glyphicon glyphicon-calendar" ></span>  Proposer un trajet 
+            <a href='RechercheCovoiturage.php'>
+                <span class = "item-brand glyphicon glyphicon-transfer" ></span> Itinéraire 
             </a>
         </span>
         <span class="navbar-covoit-item">
-            <a href='RechercheCovoiturage.php' class = "menu">
-                <span class = "item-brand glyphicon glyphicon-transfer" ></span>  Itinéraire 
+            <a href='AjoutCovoiturage.php'>
+                <span class = "item-brand glyphicon glyphicon-calendar" ></span> Proposer un trajet
             </a>
         </span>
-        <span class="navbar-covoit-item ">
-            <a href='listeCovoiturage.php' class = "menu">
-                <span class = "item-brand glyphicon glyphicon-th-list" ></span>  Liste des covoiturages 
+        <span class="navbar-covoit-item">
+            <a href='MesCovoiturages.php'>
+                <span class = "item-brand glyphicon glyphicon-road" ></span> Mes trajets
             </a>
         </span>
     </nav>
-        <?php
-        if ($_GET['action'] == 'rechercher') {
-
-
-        }
-        ?>
-        <?php
-        include("../include/_inc_parametres.php");
-        include("../include/_inc_connexion.php");
-        include("../include/dateFrancais.php");
-        include('../include/head.php');
-        include('../include/menu.php');
+    <?php
+    // if ($_GET['action'] == 'rechercher') {
+        // }
         ?>
         <h2>Covoiturage</h2>
         <p>Sur cette page, vous pouvez rechercher un covoiturage.</p>
@@ -76,14 +69,12 @@
                 <tr>
                     <td></td>
                     <td>
-                        <a href="RechercheCovoiturage.php?action=rechercher&depart=<?php echo $covoit->numCo; ?>' class = "
-                           glyphicon glyphicon-pencil">Rechercher</a></td>
+                        <a href="RechercheCovoiturage.php?action=rechercher&amp;depart= <?php //$res->numCo; ?>" 
+                        class = "glyphicon glyphicon-pencil"> Rechercher</a>
+                    </td>
                 </tr>
             </table>
         </form>
-
-    </div>
-</div>
 <?php include('../include/footer.php'); ?>
 <!-- Obligatoirement avant la balise de fermeture de l'élément body  -->
 <!-- Intégration de la libraire jQuery -->

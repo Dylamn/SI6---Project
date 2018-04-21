@@ -12,6 +12,7 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/temp.css">
     <!-- par défaut les tableaux occupent 100% de la page; le width fixe la largeur à 600 pixels -->
 </head>
 
