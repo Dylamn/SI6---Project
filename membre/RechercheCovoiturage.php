@@ -21,6 +21,7 @@
     include('../include/head.php');
     include('../include/menu.php');
 ?>
+<div class="container">
     <nav class="navbar-covoit">
         <span class="navbar-covoit-item">
             <a href='covoiturage.php'>
@@ -43,38 +44,14 @@
             </a>
         </span>
     </nav>
-    <?php
-    // if ($_GET['action'] == 'rechercher') {
-        // }
-        ?>
+
         <h2>Covoiturage</h2>
         <p>Sur cette page, vous pouvez rechercher un covoiturage.</p>
-
-
-        <form method="get" action="RechercheCovoiturages.php">
-            <input type="hidden" name="numMembre" value="<?php echo $_SESSION['numMembre']; ?>"/>
-            <table class="table table-striped">
-                <tr>
-                    <td>Départ</td>
-                    <td><input type='text' name='depart' required></td>
-                </tr>
-                <tr>
-                    <td>Arrivé :</td>
-                    <td><textarea cols="60" name='arrive'></textarea>
-                </tr>
-                <tr>
-                    <td>Date :</td>
-                    <td><input type='date' name='jourDepart' required></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <a href="RechercheCovoiturage.php?action=rechercher&amp;depart= <?php //$res->numCo; ?>" 
-                        class = "glyphicon glyphicon-pencil"> Rechercher</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        
+        
+        <!-- <a href="RechercheCovoiturage.php?action=rechercher&amp;depart= <?php //$res->numCo; ?>" 
+                        class = "glyphicon glyphicon-pencil"> Rechercher</a> -->
+</div>
 <?php include('../include/footer.php'); ?>
 <!-- Obligatoirement avant la balise de fermeture de l'élément body  -->
 <!-- Intégration de la libraire jQuery -->

@@ -1,8 +1,9 @@
 ﻿<?php
 include("../include/_inc_parametres.php");
 include("../include/_inc_connexion.php");
+
 if (isset ($_GET['action'])) {
-    if ($_GET['action'] == 'modifier') {
+    if ($_GET['action'] == "modifier") {
         // préparation de la requête : recherche d'un covoiturage particulier
         $req_pre = $cnx->prepare("UPDATE covoiturage SET etat=0, prix=:prix, 
 		description=:description, villeDepart=:villeDepart, villeArrive=:villeArrive, pointDepart=:pointDepart, pointArrive=:pointArrive, 
@@ -37,7 +38,7 @@ if (isset ($_GET['action'])) {
         </html>
         <?php
     }
-    if ($_GET['action'] == 'nouveau') {
+    if ($_GET['action'] == "nouveau") {
         // recherche du dernier numéro de covoiturage
         // préparation de la requête : recherche d'un covoiturage particulier
         $req_pre = $cnx->prepare("INSERT INTO covoiturage (numMembre, dateDepot, etat, prix, description, villeDepart, villeArrive, pointDepart, pointArrive,

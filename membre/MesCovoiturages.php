@@ -25,24 +25,23 @@
     { ?>
         <nav class="navbar-covoit">
             <span class="navbar-covoit-item">
-                <a href='covoiturage.php'>
-                    <span class = "item-brand glyphicon glyphicon-th-list" ></span> Liste des covoiturages 
-                </a>
+                <button type="button" class="btn-menu">
+                    <a href="covoiturage.php">
+                        <span class="item-brand glyphicon glyphicon-th-list"></span> Liste des covoiturages
+                    </a>
+                </button>
             </span>
             <span class="navbar-covoit-item">
-                <a href='RechercheCovoiturage.php'>
-                    <span class = "item-brand glyphicon glyphicon-transfer" ></span> Itinéraire 
-                </a>
+                <button type="button" class="btn-menu">
+                    <a href="AjoutCovoiturage.php">
+                        <span class="item-brand glyphicon glyphicon-calendar"></span> Proposer un trajet
+                    </a>
+                </button>
             </span>
             <span class="navbar-covoit-item">
-                <a href='AjoutCovoiturage.php'>
-                    <span class = "item-brand glyphicon glyphicon-calendar" ></span> Proposer un trajet 
-                </a>
-            </span>
-            <span class="navbar-covoit-item">
-                <a href='MesCovoiturages.php'>
+                <button type="button" class="btn-menu" href="MesCovoiturages.php">
                     <span class = "item-brand glyphicon glyphicon-road" ></span> Mes trajets
-                </a>
+                </button>
             </span>
         </nav>
         <?php
@@ -54,7 +53,8 @@
         echo 'Mon covoiturage';
     } ?>
         <svg height="10" width="100%">
-            <line x1="0%" y1="10" x2="100%" y2="10" style="stroke:#6399cd; stroke-width:4"/>
+            <line x1="0%" y1="10" x2="100%" y2="10" style="stroke:#6399cd; stroke-width:4px"/>
+            Sorry, your browser does not support inline SVG.
         </svg>
     </h1>
     <?php
@@ -165,7 +165,7 @@
     {
     // affichage de la liste des covoiturages
     //	on récupère toutes les lignes
-    $resultat = $cnx->query("select covoiturage.* FROM covoiturage, membre 
+    $resultat = $cnx->query("SELECT covoiturage.* FROM covoiturage, membre 
         WHERE membre.numMembre = " . $_SESSION['numMembre'] . " AND covoiturage.numMembre = membre.numMembre ORDER BY dateDepot DESC;");
 
     //le résultat est récupéré sous forme d'objet

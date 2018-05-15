@@ -16,35 +16,37 @@
 
 <body>
 <?php
-include("../include/_inc_parametres.php"); 
-include("../include/_inc_connexion.php");
-include("../include/dateFrancais.php");
-include('../include/head.php');
-include('../include/menu.php');
+require_once("../include/_inc_parametres.php"); 
+require_once("../include/_inc_connexion.php");
+require_once("../include/dateFrancais.php");
+require_once('../include/head.php');
+require_once('../include/menu.php');
 ?>
+
 <div class="container">
 	<nav class="navbar-covoit">
-		<span class="navbar-covoit-item">
-			<a href='covoiturage.php'>
-				<span class="item-brand glyphicon glyphicon-th-list"></span> Liste des covoiturages
-			</a>
-		</span>
-		<span class="navbar-covoit-item">
-			<a href='RechercheCovoiturage.php'>
-				<span class="item-brand glyphicon glyphicon-transfer"></span> Itinéraire
-			</a>
-		</span>
-		<span class="navbar-covoit-item">
-			<a href='AjoutCovoiturage.php'>
-				<span class="item-brand glyphicon glyphicon-calendar"></span> Proposer un trajet
-			</a>
-		</span>
-		<span class="navbar-covoit-item">
-			<a href='MesCovoiturages.php'>
-				<span class="item-brand glyphicon glyphicon-road"></span> Mes trajets
-			</a>
-		</>
-	</nav>
+        <span class="navbar-covoit-item">
+            <button type="button" class="btn-menu">
+				<a href="covoiturage.php">
+					<span class="glyphicon glyphicon-th-list"></span> Liste des covoiturages
+				</a>
+            </button>
+        </span>
+        <span class="navbar-covoit-item">
+            <button type="button" class="btn-menu">
+                <a href="AjoutCovoiturage.php">
+                    <span class="glyphicon glyphicon-calendar"></span> Proposer un trajet
+                </a>
+            </button>
+        </span>
+        <span class="navbar-covoit-item">
+            <button type="button" class="btn-menu">
+				<a href="MesCovoiturages.php">
+					<span class = "glyphicon glyphicon-road"></span> Mes trajets
+				</a>
+            </button>
+        </span>
+    </nav>
 	<h1>
         Ajout d'un covoiturage
         <svg height="10" width="100%">
@@ -53,7 +55,7 @@ include('../include/menu.php');
     </h1>
 	<p>
 		Sur cette page, vous pouvez ajouter un covoiturage. 
-		<br /> 
+		<br />
 		(*) Champs obligatoires.
 	</p>
 
@@ -63,7 +65,7 @@ include('../include/menu.php');
 			<tr>
 				<td>Prix : *</td>
 				<td>
-					<input type='text' name='prix' required>
+					<input type='text' name='prix' pattern="[0-9]{1,2}+[.,]{1,1}?[0-9]{1,2}*" required>
 				</td>
 			</tr>
 			<tr>
@@ -74,37 +76,37 @@ include('../include/menu.php');
 			<tr>
 				<td>Ville de départ : * </td>
 				<td>
-					<input type='text' name='villeDepart' required>
+					<input type='text' name='villeDepart' pattern="[a-zA-Z -]+" required>
 				</td>
 			</tr>
 			<tr>
 				<td>Ville d'arrivé : * </td>
 				<td>
-					<input type='text' name='villeArrive' required>
+					<input type='text' name='villeArrive' pattern="[a-zA-Z -]+" required>
 				</td>
 			</tr>
 			<tr>
 				<td>Point de départ : * </td>
 				<td>
-					<input type='text' name='pointDepart' required>
+					<input type='text' name='pointDepart' pattern="[a-zA-Z -]+" required>
 				</td>
 			</tr>
 			<tr>
 				<td>Point d'arrivé : * </td>
 				<td>
-					<input type='text' name='pointArrive' required>
+					<input type='text' name='pointArrive' pattern="[a-zA-Z -]+" required>
 				</td>
 			</tr>
 			<tr>
 				<td>Heure de départ : * </td>
 				<td>
-					<input type='time' name='heureDepart' required>
+					<input type='time' name='heureDepart' pattern="([0-1][0-9]:[0-5][0-9]|[2][0-4]:[0-5][0-9])" required>
 				</td>
 			</tr>
 			<tr>
 				<td>Heure d'arrivé : * </td>
 				<td>
-					<input type='time' name='heureArrive' required>
+					<input type='time' name='heureArrive' pattern="([0-1][0-9]:[0-5][0-9]|[2][0-4]:[0-5][0-9])" required>
 				</td>
 			</tr>
 			<tr>
@@ -123,7 +125,7 @@ include('../include/menu.php');
 			<tr>
 				<td>Nombre de places : * </td>
 				<td>
-					<input type='number' name='nbPlaces' required>
+					<input type='number' name='nbPlaces'  pattern="[0-9]{1,2}" required>
 				</td>
 			</tr>
 			<tr>
@@ -135,19 +137,19 @@ include('../include/menu.php');
 			<tr>
 				<td>Type de voiture :</td>
 				<td>
-					<input type='text' name='voiture'>
+					<input type='text' name='voiture' pattern="[a-zA-Z0-9 -]+">
 				</td>
 			</tr>
 			<tr>
 				<td>Couleur de la voiture :</td>
 				<td>
-					<input type='text' name='couleur'>
+					<input type='text' name='couleur' pattern="[a-zA-Z]+">
 				</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
-					<input type='submit' value='Ajouter' />
+					<input type='submit' class="btn btn-success" value='Ajouter'>
 				</td>
 			</tr>
 		</table>

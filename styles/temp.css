@@ -1,58 +1,45 @@
-/*	Responsive
-    ==================================================*/
-
-@media screen and (max-width: 560px) {
-    #side-choice {
-        margin: 0 50px;
-    }
-    #ad-head h2 {
-        margin-top: 18px !important;
-    }
-    #return-arrow {
-        font-size: 30px !important;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    #road-dash {
-        display: none;
-    }
-}
-
 /*	Covoiturage
     ==================================================*/
 
-/* Nav bar */
+/* Itineraire */
 
-.navbar-covoit {
-    margin-bottom: 16px;
+#itineraire .col-md-offset-1\.5 {
+    margin-left: 12.5%;
+}
+
+#itineraire .col-md-2 {
+    margin-top: 32px;
+}
+
+.btn-menu {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 500;
     text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    background-color: white;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 22px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.navbar-covoit .navbar-covoit-item {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.navbar-covoit .navbar-covoit-item .item-brand {
-    margin-right: 8px;
-    margin-left: 25px;
-}
+/* Tableau */
 
 thead tr td {
     background-color: #6399cd;
     color: #fff;
 }
 
-#separator-table {
-    color: #848484;
-}
-
-.covoit-table-title {
-    text-align: center;
-}
-
-#confirm tr:nth-of-type(even) {
+#confirm tbody tr:nth-of-type(even) {
     background-color: #e7e5e5ad;
 }
 
@@ -90,11 +77,10 @@ svg #dash-road {
     stroke-dasharray: 5, 5;
 }
 
-/* article conducteur*/
+/* article conducteur */
 
 #info-driver {
     float: left;
-    /* border: 1px solid #A4A4A4; */
     border-radius: 5px;
 }
 
@@ -113,6 +99,15 @@ svg #dash-road {
 /*  Animation
     ================================================*/
 
+@keyframes slide-down {
+    0% {
+        transform: rotate(180deg);
+    }
+    0% {
+        transform-origin: right;
+    }
+}
+
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -121,7 +116,7 @@ svg #dash-road {
         transform: scale(1.25);
         background-color: hsla(0, 100%, 50%, 0.75);
     }
-    18% {
+    19% {
         transform: scale(1.50);
         background-color: hsla(0, 100%, 50%, 0.30);
     }
@@ -146,4 +141,38 @@ svg #dash-road {
 #parent-pulse {
     position: relative;
     color: red;
+}
+
+/*	Responsive
+    ==================================================*/
+
+@media screen and (max-width: 768px) {
+    .btn-pulse {
+        top: 0px;
+        left: 0px;
+    }
+}
+@media screen and (max-width: 560px) {
+    #side-choice {
+        margin: 0 50px;
+    }
+    #ad-head h2 {
+        margin-top: 18px !important;
+    }
+    #return-arrow {
+        font-size: 30px !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    #road-dash {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .navbar-covoit {
+        display: flex;
+        flex-direction: column;
+    }
 }

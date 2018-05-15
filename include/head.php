@@ -83,13 +83,13 @@ ob_start();
             
 
             <!-- Latest compiled and minified CSS -->
-            <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 
             <!-- Latest compiled and minified JavaScript -->
-            <script src="bootstrap/js/bootstrap.min.js"></script>
+            <script src="../bootstrap/js/bootstrap.min.js"></script>
 
             <!-- Style du thème -->
-            <link rel="stylesheet" href="styles/style.css">
+            <link rel="stylesheet" href="../styles/style.css">
 
             <!-- TyniMCE -->
             <script type="text/javascript" src="include/tinymce/tinymce.min.js"></script>
@@ -107,7 +107,7 @@ ob_start();
     if (strstr($_SERVER['REQUEST_URI'], '/membre/')){
         require_once('../include/Outils.php');
     } else {
-        require_once('include/Outils.php');
+        require_once('Outils.php');
     }
     ?>
     <div id="wrap"> <!-- Ouverture de la div wrap pour le footer -->

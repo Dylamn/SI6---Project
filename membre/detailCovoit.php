@@ -7,7 +7,7 @@
     <!-- type d'encodage de la page -->
     <meta charset="utf-8"/>
     <!-- taille et échelle de la page -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- liens avec les fichiers css de bootstrap -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
@@ -18,7 +18,14 @@
 
 <body>
 <div class="row" id="ad-head">
-    <a href='covoiturage.php' class="glyphicon glyphicon-arrow-left" id="return-arrow"></a>
+    <?php
+    if (isset($_GET['d'], $_GET['a'], $_GET['date']) == true) {
+        $href = 'searchCovoits.php?d=' . $_GET['d'] . '&amp;a=' . $_GET['a'] . '&amp;date=' . $_GET['date'];
+    } else {
+        $href = 'covoiturage.php';
+    } ?>
+
+    <a href='<?= $href ?>' class="glyphicon glyphicon-arrow-left" id="return-arrow"></a>
     <h1>Caractéristiques du covoiturage</h1>
 </div>
 <div class="container">
@@ -56,9 +63,10 @@
                     <td scope="col" class="text-left">
                         <span class="glyphicon glyphicon-home"></span> |
                         <?= utf8_encode($covoit->villeDepart) . '<br />' .
-                        '<span id="sub-path-info">' . utf8_encode($covoit->pointDepart) . '</span>' ?>
+                        '<span id="sub-path-info">' . utf8_encode($covoit->pointDepart)
+                        . '<br/>' . $covoit->heureDepart . '</span>'; ?>
                     </td>
-                    <td scope="col" colspan="3">
+                    <td scope="col" colspan="3" style="width: 800px;">
                         <svg id="road-dash" width="100%" height="100">
                             <line x1="0.9%" y1="50" x2="99%" y2="50" stroke-width="9" stroke="grey"/>
                             <line id="dash-road" x1="0.9%" y1="50" x2="99%" y2="50"/>
@@ -70,13 +78,14 @@
                     <td scope="col" class="text-right">
                         <span class="glyphicon glyphicon-flag"></span> |
                         <?= utf8_encode($covoit->villeArrive) . '<br />' .
-                        '<span id="sub-path-info">' . utf8_encode($covoit->pointArrive) . '</span>' ?>
+                        '<span id="sub-path-info">' . utf8_encode($covoit->pointArrive) 
+                        . '<br />' . $covoit->heureArrive . '</span>'; ?>
                     </td>
                 </tr>
             </table>
         </div>
     </section>
-    <br/>
+    <br />
     <article id="info-driver" class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -107,17 +116,19 @@
                 </td>
                 <td scope="col" colspan="3">
                     <p>
-                        <?= $covoit->description ?>
+                        <?= utf8_encode($covoit->description); ?>
                     </p>
                 </td>
             </tr>
         </table>
-        <button type="button" class="btn btn-primary">
-            <a style="color: #fff;" href='envoiMail.php?id=<?php echo $covoit->numCo; ?>'
-               class="glyphicon glyphicon-envelope"> Envoyer mail</a>
-        </button>
     </article>
-
+    <div class="row">
+        <div class="col-md-8">
+            <button type="button" class="btn btn-primary">
+                <a style="color: #fff;" href='envoiMail.php?id=<?php echo $covoit->numCo; ?>'
+                   class="glyphicon glyphicon-envelope"> Envoyer mail</a>
+            </button>
+        </div>
     <?php if ($covoit->etat == 0) { ?>
         <div id="booking" class="text-center">
             <p>Veuillez effectuer votre choix ici :</p>
@@ -128,7 +139,14 @@
             </form>
         </div>
         <?php
-    } ?>
+    } else { ?>
+
+            <div class="col-md-2 col-md-offset-2">
+                <button type="button" class="btn btn-primary">Réservez</button>
+            </div>
+        </div>
+    <?php
+    }?>
 </div>
 
 <?php include('../include/footer.php'); ?>
