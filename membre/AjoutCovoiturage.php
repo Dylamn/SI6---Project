@@ -143,7 +143,7 @@ require_once('../include/menu.php');
 			<tr>
 				<td>Couleur de la voiture :</td>
 				<td>
-					<input type='text' name='couleur' pattern="[a-zA-Z]+">
+					<input type='text' name='couleur' pattern="[a-zA-Z0-9]+">
 				</td>
 			</tr>
 			<tr>

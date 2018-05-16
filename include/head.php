@@ -83,10 +83,10 @@ ob_start();
             
 
             <!-- Latest compiled and minified CSS -->
-            <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
             <!-- Latest compiled and minified JavaScript -->
-            <script src="../bootstrap/js/bootstrap.min.js"></script>
+            <script src="bootstrap/js/bootstrap.min.js"></script>
 
             <!-- Style du thème -->
             <link rel="stylesheet" href="../styles/style.css">

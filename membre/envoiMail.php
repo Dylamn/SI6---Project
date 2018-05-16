@@ -19,15 +19,17 @@ if (isset($_POST['idAnnonce'], $_POST['objet'], $_POST['message']) == true) {
     $success = Outils::envoyerMail($destinataire[0], $_POST['objet'], $_POST['message'], $expediteur[0]);
 
     if ($success == true) {
-        echo '<div class="alert alert-success">';
+        echo '<div class="col-md-6 col-md-offset-3 alert alert-success">';
         echo    '<strong>Succès :</strong> Votre mail a été envoyé !';
         echo '</div>';
     }
     else {
-        echo '<div class="alert alert-danger">';
+        echo '<div class="col-md-6 col-md-offset-3 alert alert-danger">';
         echo    '<strong>Erreur :</strong> Une erreur s\'est produite !';
         echo '</div>';
     }
+
+    header('refresh:3; url=detailCovoit.php?id=' . $_POST['idAnnonce']);
 }
 else {
     ?>
